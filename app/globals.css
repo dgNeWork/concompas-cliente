@@ -132,8 +132,8 @@
 /* Expone las variables anteriores como utilidades de Tailwind:
    bg-primary, text-muted-foreground, bg-destacado, text-marca-terracota... */
 @theme inline {
-  --font-sans: var(--font-nunito);
-  --font-heading: var(--font-nunito);
+  --font-sans: var(--font-jakarta);
+  --font-heading: var(--font-jakarta);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
 
   --color-background: var(--background);
