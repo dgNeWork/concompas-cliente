@@ -1,26 +1,203 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/*
+ * Tema visual de ConCompas (Ticket 22).
+ *
+ * Todos los colores salen del logo: azul marino #092349, rojo flamenco #BB3436
+ * y terracota #B25234. Se definen como variables CSS con los nombres que usan
+ * los componentes de shadcn/ui (background, primary, muted...), de modo que
+ * cualquier componente que añadamos hereda la marca sin tocarlo.
+ *
+ * Modo oscuro: lo activa la clase "dark" en <html>, que pone next-themes según
+ * la preferencia del sistema o la elección del usuario. Por eso no se usa
+ * @media (prefers-color-scheme): si no, el botón de cambiar tema no podría
+ * imponerse al sistema.
+ *
+ * Contraste comprobado con la fórmula WCAG 2.1: todos los pares de texto/fondo
+ * superan 4,5:1 (mínimo para texto normal).
+ */
+@custom-variant dark (&:is(.dark *));
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Base: blanco roto cálido de fondo (menos frío que el blanco puro) y
+     tarjetas blancas para que destaquen sobre él */
+  --background: #f5f2ec;
+  --foreground: #0e1b30;
+  --card: #ffffff;
+  --card-foreground: #0e1b30;
+  --popover: #ffffff;
+  --popover-foreground: #0e1b30;
+
+  /* Acción principal: azul marino de marca */
+  --primary: #092349;
+  --primary-foreground: #f5f2ec;
+
+  /* Acciones secundarias, fondos suaves y hover de menús (en shadcn "accent"
+     es el fondo al pasar el ratón, no un color de marca) */
+  --secondary: #e9e3d8;
+  --secondary-foreground: #092349;
+  --muted: #ece7de;
+  --muted-foreground: #5a6475;
+  --accent: #e9e3d8;
+  --accent-foreground: #092349;
+
+  /* Errores: rojo más anaranjado que el de marca para no confundirlos con los
+     botones destacados; además, los errores siempre irán con icono y texto */
+  --destructive: #c4281c;
+
+  --border: #ddd5c8;
+  --input: #d3cabb;
+  --ring: #3a5a8c;
+
+  /* Colores propios de ConCompas, además de los de shadcn */
+  --marca-azul: #092349;
+  --marca-rojo: #bb3436;
+  --marca-terracota: #b25234;
+  /* Botón destacado (llamadas a la acción, p. ej. "Quiero que me lleven") */
+  --destacado: #bb3436;
+  --destacado-foreground: #ffffff;
+
+  /* Gráficas (panel admin) con la paleta de marca */
+  --chart-1: #092349;
+  --chart-2: #bb3436;
+  --chart-3: #b25234;
+  --chart-4: #5b7db1;
+  --chart-5: #d9a441;
+
+  --radius: 0.625rem;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #0e1b30;
+  --sidebar-primary: #092349;
+  --sidebar-primary-foreground: #f5f2ec;
+  --sidebar-accent: #e9e3d8;
+  --sidebar-accent-foreground: #092349;
+  --sidebar-border: #ddd5c8;
+  --sidebar-ring: #3a5a8c;
 }
 
+.dark {
+  /* Azul noche de fondo (derivado del azul marino) y tarjetas algo más claras */
+  --background: #0b1627;
+  --foreground: #e9edf4;
+  --card: #12213a;
+  --card-foreground: #e9edf4;
+  --popover: #12213a;
+  --popover-foreground: #e9edf4;
+
+  /* En oscuro el botón principal se invierte: claro con texto azul marino */
+  --primary: #e9edf4;
+  --primary-foreground: #092349;
+
+  --secondary: #1b2c47;
+  --secondary-foreground: #e9edf4;
+  --muted: #16263f;
+  --muted-foreground: #a3aec2;
+  --accent: #1b2c47;
+  --accent-foreground: #e9edf4;
+
+  --destructive: #f0645a;
+
+  --border: rgb(233 237 244 / 12%);
+  --input: rgb(233 237 244 / 18%);
+  --ring: #8fa8d6;
+
+  /* Versión de los colores de marca que se lee bien sobre fondo oscuro */
+  --marca-azul: #e9edf4;
+  --marca-rojo: #d8474a;
+  --marca-terracota: #d9774f;
+  /* El rojo aclarado del logo (#D8474A) no llega a 4,5:1 con texto blanco,
+     así que el botón destacado usa un tono intermedio que sí lo cumple */
+  --destacado: #c93c40;
+  --destacado-foreground: #ffffff;
+
+  --chart-1: #8fa8d6;
+  --chart-2: #d8474a;
+  --chart-3: #d9774f;
+  --chart-4: #e9edf4;
+  --chart-5: #d9a441;
+
+  --sidebar: #12213a;
+  --sidebar-foreground: #e9edf4;
+  --sidebar-primary: #e9edf4;
+  --sidebar-primary-foreground: #092349;
+  --sidebar-accent: #1b2c47;
+  --sidebar-accent-foreground: #e9edf4;
+  --sidebar-border: rgb(233 237 244 / 12%);
+  --sidebar-ring: #8fa8d6;
+}
+
+/* Expone las variables anteriores como utilidades de Tailwind:
+   bg-primary, text-muted-foreground, bg-destacado, text-marca-terracota... */
 @theme inline {
+  --font-sans: var(--font-nunito);
+  --font-heading: var(--font-nunito);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-marca-azul: var(--marca-azul);
+  --color-marca-rojo: var(--marca-rojo);
+  --color-marca-terracota: var(--marca-terracota);
+  --color-destacado: var(--destacado);
+  --color-destacado-foreground: var(--destacado-foreground);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
   }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  html {
+    @apply font-sans;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  /* Cursor de mano en botones activos (opción --pointer de shadcn) */
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
 }

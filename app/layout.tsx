@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Nunito } from "next/font/google";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
+// Nunito: sans-serif redondeada, cercana a la tipografía del logo "concompas" y
+// muy legible en pantallas pequeñas. next/font la descarga en el build y la sirve
+// desde nuestro propio dominio (sin peticiones a Google desde el navegador del
+// usuario) y evita el salto de maquetación al cargar la fuente.
+// Se expone como variable CSS (--font-nunito) que globals.css asigna a font-sans.
+const nunito = Nunito({
+  variable: "--font-nunito",
   subsets: ["latin"],
 });
 
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html
       lang="es"
-      className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
+      className={`${nunito.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

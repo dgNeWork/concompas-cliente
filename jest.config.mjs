@@ -21,6 +21,10 @@ const customJestConfig = {
     "!**/node_modules/**",
     "!next.config.ts",
     "!app/layout.tsx", // metadata estática de Next, sin lógica propia
+    // Componentes generados por shadcn/ui (npx shadcn add ...): código de la
+    // librería, probado en su propio proyecto. Si les añadimos lógica nuestra,
+    // se testea en el componente que los use o se quita de esta lista.
+    "!components/ui/**",
   ],
   coverageDirectory: "coverage",
 };
