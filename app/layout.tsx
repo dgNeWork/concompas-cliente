@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { Cabecera } from "@/components/layout/cabecera";
+import { Pie } from "@/components/layout/pie";
 import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
@@ -39,7 +41,14 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider>{children}</ThemeProvider>
+        <ThemeProvider>
+          {/* Estructura común a todas las páginas: cabecera fija, contenido que
+              ocupa el espacio sobrante (flex-1, así el pie queda abajo aunque la
+              página tenga poco contenido) y pie */}
+          <Cabecera />
+          <main className="flex flex-1 flex-col">{children}</main>
+          <Pie />
+        </ThemeProvider>
       </body>
     </html>
   );

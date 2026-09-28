@@ -14,6 +14,12 @@ const customJestConfig = {
   testEnvironment: "jsdom",
   // Matchers de Testing Library y APIs del navegador que jsdom no trae (ver el archivo)
   setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
+  // Alias "@/" de tsconfig.json (import { cn } from "@/lib/utils"). El
+  // compilador de Next ya lo entiende en los imports, pero jest.mock("@/...")
+  // lo resuelve Jest por su cuenta y necesita esta equivalencia.
+  moduleNameMapper: {
+    "^@/(.*)$": "<rootDir>/$1",
+  },
   testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/"],
   collectCoverageFrom: [
     "**/*.{ts,tsx}",
