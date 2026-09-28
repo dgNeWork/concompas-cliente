@@ -12,6 +12,9 @@ const eslintConfig = defineConfig([
     "out/**",
     "build/**",
     "next-env.d.ts",
+    // Informe HTML de cobertura que genera Jest (npm run test:cov): es código
+    // generado, no del proyecto, y no se sube al repo
+    "coverage/**",
   ]),
 ]);
 
