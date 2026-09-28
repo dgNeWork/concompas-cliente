@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="ConCompas">
+  <!-- Icono de app de ConCompas (pestaña del navegador, pantalla de inicio del móvil).
+       Es el mismo dibujo que concompas-simbolo.svg, en blanco roto y rojo sobre un
+       cuadrado azul marino de marca, con los trazos más gruesos para que se lea en
+       tamaños pequeños. El dibujo se reduce al 80% para quedar dentro de la zona
+       segura de los iconos adaptables de Android. -->
+  <rect width="512" height="512" rx="112" fill="#092349"/>
+  <g transform="translate(256 256) scale(0.8) translate(-256 -256)">
+  <defs>
+    <!-- Máscara que abre huecos en los anillos alrededor de la estrella y del pin,
+         igual que el logo original, sin depender del color de fondo. -->
+    <mask id="huecos-icono" maskUnits="userSpaceOnUse" x="0" y="0" width="512" height="512">
+      <rect width="512" height="512" fill="#fff"/>
+      <g fill="#000" stroke="#000" stroke-linejoin="round">
+        <polygon stroke-width="22" points="256,16 283,229 482,256 283,283 256,496 229,283 30,256 229,229"/>
+        <g stroke-width="20">
+          <polygon points="256,256 239,217 101,101 217,239"/>
+          <polygon points="256,256 295,239 411,101 273,217"/>
+          <polygon points="256,256 273,295 411,411 295,273"/>
+          <polygon points="256,256 217,273 101,411 239,295"/>
+        </g>
+        <path stroke-width="22" d="M256 205 C244 183 208 147 208 126 A48 48 0 1 1 304 126 C304 147 268 183 256 205 Z"/>
+      </g>
+    </mask>
+  </defs>
+
+  <g fill="none" stroke="#F5F2EC" stroke-width="11" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Anillos exterior e interior -->
+    <g mask="url(#huecos-icono)">
+      <circle cx="256" cy="256" r="193"/>
+      <circle cx="256" cy="256" r="149"/>
+    </g>
+    <!-- Puntas diagonales (NO, NE, SE, SO) -->
+    <polygon points="256,256 239,217 101,101 217,239"/>
+    <polygon points="256,256 295,239 411,101 273,217"/>
+    <polygon points="256,256 273,295 411,411 295,273"/>
+    <polygon points="256,256 217,273 101,411 239,295"/>
+    <!-- Estrella principal de cuatro puntas con su nervio central -->
+    <polygon points="256,16 283,229 482,256 283,283 256,496 229,283 30,256 229,229"/>
+    <path d="M256 30 V482 M44 256 H468"/>
+  </g>
+
+  <!-- Aguja en diagonal (rojo flamenco) -->
+  <polygon points="358,154 282,282 154,358 230,230" fill="#D8474A"
+           stroke="#F5F2EC" stroke-width="10" stroke-linejoin="round"/>
+  <circle cx="256" cy="256" r="17" fill="#092349" stroke="#F5F2EC" stroke-width="11"/>
+
+  <!-- Pin de ubicación: la aguja del norte que marca el destino -->
+  <path d="M256 205 C244 183 208 147 208 126 A48 48 0 1 1 304 126 C304 147 268 183 256 205 Z"
+        fill="#D8474A" stroke="#F5F2EC" stroke-width="10" stroke-linejoin="round"/>
+  <circle cx="256" cy="126" r="17" fill="#092349"/>
+
+  <!-- Los cuatro puntos: guiño al compás 3x4 del carnaval de Cádiz -->
+  <g fill="#D8474A">
+    <circle cx="406" cy="168" r="14"/>
+    <circle cx="440" cy="149" r="14"/>
+    <circle cx="423" cy="207" r="14"/>
+    <circle cx="461" cy="200" r="14"/>
+  </g>
+  </g>
+</svg>
