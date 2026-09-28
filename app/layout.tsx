@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 // Plus Jakarta Sans: sans-serif geométrica y moderna, muy usada en fintech y
@@ -28,11 +29,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // suppressHydrationWarning: next-themes añade la clase "dark" a <html> en el
+    // navegador antes de que React tome el control (para evitar un destello de
+    // tema claro). Esa diferencia con el HTML del servidor es intencionada, así
+    // que se silencia el aviso SOLO en esta etiqueta, no en sus hijos.
     <html
       lang="es"
       className={`${jakarta.variable} h-full antialiased`}
+      suppressHydrationWarning
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <ThemeProvider>{children}</ThemeProvider>
+      </body>
     </html>
   );
 }

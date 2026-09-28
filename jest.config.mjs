@@ -12,6 +12,8 @@ const createJestConfig = nextJest({ dir: "./" });
 /** @type {import("jest").Config} */
 const customJestConfig = {
   testEnvironment: "jsdom",
+  // Matchers de Testing Library y APIs del navegador que jsdom no trae (ver el archivo)
+  setupFilesAfterEnv: ["<rootDir>/jest.setup.ts"],
   testPathIgnorePatterns: ["<rootDir>/.next/", "<rootDir>/node_modules/"],
   collectCoverageFrom: [
     "**/*.{ts,tsx}",
